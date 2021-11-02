@@ -34,6 +34,7 @@ function ProductItems({ item, onAddToCart, grid }) {
             history.push('/signin')
         }
     }
+    console.log(item)
     return (
         <div className={`col-md-${grid}`} >
             <figure className="card card-product">
@@ -57,8 +58,8 @@ function ProductItems({ item, onAddToCart, grid }) {
                         {item.quantityInStock <= 0 ? "Out of stock" : "Add To Cart"}
                     </button>
                     <div className="price-wrap h6" style={{ textDecoration: 'none' }}>
-                        {/* <span className="price-new">{item.detailPromotion !== null ? item.price * (100 - item.detailPromotion.PHANTRAMKM) / 100 : item.price}đ</span> */}
-                        <NumberFormat displayType="text" thousandSeparator={true} value={item.detailPromotion !== null ? item.price * (100 - item.detailPromotion.PHANTRAMKM) / 100 : item.price} suffix={"đ"} />
+                        {/* <span className="price-new">{item.detailPromotion !== null ? item.price * (100 - item.detailPromotion.percenDiscount) / 100 : item.price}đ</span> */}
+                        <NumberFormat displayType="text" thousandSeparator={true} value={item.detailPromotion !== null ? item.price * (100 - item.detailPromotion.percentDiscount) / 100 : item.price} suffix={"đ"} />
                         &nbsp;&nbsp;
                         {/* <del className="price-old">{item.detailPromotion !== null ? item.price : ""}</del> */}
                         <del className="price-old"><NumberFormat displayType="text" thousandSeparator={true} value={item.detailPromotion !== null ? item.price : ""} suffix={"đ"} /></del>
