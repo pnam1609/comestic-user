@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -10,9 +10,13 @@ import OrderPage from './OrderPage'
 
 export const Order = (props) => {
     const itemRef = useRef([])
-    const lineRef = useRef(null)
+    const lineRef = useRef()
     const [status, setStatus] = useState(0)
     var history = useHistory()
+    useEffect(() => {
+        lineRef.current.style.left = itemRef.current[0].offsetLeft + "px";
+        lineRef.current.style.width = itemRef.current[0].offsetWidth + "px";
+    }, [])
 
     function handleClick(e) {
         var ele = e.target // lấy ra element để so sanh có có phải là element khi click vô element con hay k

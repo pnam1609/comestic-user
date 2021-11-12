@@ -34,7 +34,7 @@ function ProductItems({ item, onAddToCart, grid }) {
             history.push('/signin')
         }
     }
-    console.log(item)
+    // console.log(item)
     return (
         <div className={`col-md-${grid}`} >
             <figure className="card card-product">

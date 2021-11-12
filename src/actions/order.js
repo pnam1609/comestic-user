@@ -77,7 +77,7 @@ export const actAddOrderReq = (cart, value, history,transactionID) => {
                     text: res.data.message
                 })
             }
-            console.log(res)
+            return res.data
         });
     }
 }

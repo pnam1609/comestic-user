@@ -83,15 +83,11 @@ function Total({ cart, onSendFunc, value, onAddOrder,onCheckQuantity }) {
         actions.order.capture()
             .then(async () => {
                 console.log(data)
-                let res = await callApiForPaypal("/v1/oauth2/token", "POST")
-                if (res !== undefined) {
-                    console.log(res);
-                    let dataPaypal = await callApiPaypal(`v2/checkout/orders/${data.orderID}`, "GET", null, `Bearer ${res.data.access_token}`)
-                    var transactionID = dataPaypal.data.purchase_units[0].payments.captures[0].id
-                    setTimeout(() => {
-                        console.log(transactionID);
-                        onAddOrder(cart, value, hisotry, transactionID)
-                    }, 2000);
+                const res = await callApiForPaypal("/v1/oauth2/token", "POST")
+                if(res !== undefined){
+                    const dataPaypal = await callApiPaypal(`v2/checkout/orders/${data.orderID}`, "GET", null, `Bearer ${res.data.access_token}`)
+                    const transactionID = dataPaypal.data.purchase_units[0].payments.captures[0].id
+                    onAddOrder(cart, value, hisotry, transactionID)
                 }
             })
     };
@@ -210,7 +206,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => {
     return ({
         onAddOrder: (cart, value, hisotry, transactionID) => {
-            dispatch(actAddOrderReq(cart, value, hisotry, transactionID))
+             dispatch(actAddOrderReq(cart, value, hisotry, transactionID))
         },
         onCheckQuantity: order => {
             return dispatch(actCheckQuantity(order))
